@@ -17,7 +17,7 @@ r = cv2.filter2D(gray, -1, kernel)
 
 h,w = r.shape
 
-annotated = gray = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+annotated = cv2.cvtColor(r, cv2.COLOR_GRAY2RGB)
 
 for column in range(w):
     longest = 0
@@ -30,7 +30,7 @@ for column in range(w):
                 longest = current
                 current = 0
 
-    if current > 10:
+    if longest > 8:
+        cv2.line(annotated,(column,0),(column,h),(255,0,0),1)
 
-
-cv2.imwrite('test.jpg', r)
+cv2.imwrite('test.jpg', annotated)
